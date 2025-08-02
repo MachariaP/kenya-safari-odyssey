@@ -1,3 +1,4 @@
+import { link } from 'framer-motion/client';
 import parks from '../data/parks';
 import ParkCard from './ParkCard';
 import Modal from './Modal';

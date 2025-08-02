@@ -1,0 +1,169 @@
+/* src/components/Hero.css */
+
+/* Root variables for Safari Elegance theme */
+:root {
+  --safari-sand: #F5E9D4;
+  --safari-green: #3A5F3F;
+  --safari-brown: #8B4513;
+  --safari-accent: #DAA520;
+  --text-white: #FFFFFF;
+}
+
+/* Hero section container */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* Full viewport height on mobile */
+  background-image: url('/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Semi-transparent overlay */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* 50% opacity black overlay */
+  z-index: 1;
+}
+
+/* Content container */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px; /* Limit content width for readability */
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.4); /* Glassmorphism effect */
+  backdrop-filter: blur(8px); /* Subtle blur for modern look */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  text-align: center;
+  animation: fadeInUp 1s ease-out forwards; /* Entrance animation */
+}
+
+/* Title */
+.hero-content h1 {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 1rem;
+  line-height: 1.2; /* Tight line spacing for bold impact */
+}
+
+/* Subtitle */
+.hero-content p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem; /* 20px */
+  color: rgba(255, 255, 255, 0.9); /* Slightly transparent for hierarchy */
+  margin-bottom: 2rem;
+  max-width: 500px; /* Limit line length for readability */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* CTA Button */
+.hero-cta {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background-color: var(--safari-accent);
+  color: var(--safari-brown);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 2rem; /* Rounded, pill-shaped button */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease; /* Smooth hover transitions */
+}
+
+.hero-cta:hover,
+.hero-cta:focus {
+  background-color: var(--safari-green);
+  color: var(--text-white);
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  outline: none; /* Remove default focus outline */
+}
+
+.hero-cta:focus {
+  outline: 2px solid var(--safari-accent); /* Accessible focus state */
+  outline-offset: 2px;
+}
+
+/* Scroll Indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  animation: bounce 2s infinite; /* Bouncing animation */
+}
+
+.hero-scroll svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: var(--text-white);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .hero-section {
+    height: 90vh; /* Taller on desktop */
+  }
+
+  .hero-content h1 {
+    font-size: 4rem; /* 64px */
+  }
+
+  .hero-content p {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .hero-content {
+    padding: 2.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-content h1 {
+    font-size: 2rem; /* 32px */
+  }
+
+  .hero-content p {
+    font-size: 1rem; /* 16px */
+  }
+
+  .hero-cta {
+    padding: 0.75rem 2rem;
+    font-size: 1rem; /* 16px */
+  }
+}
