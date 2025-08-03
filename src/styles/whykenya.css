@@ -1,52 +1,154 @@
-/* src/styles/whyKenya.css */
+/* src/styles/whykenya.css */
 
-/* Emoji Icon Animation */
-@keyframes gentlePulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+/* Safari Theme Variables (ensure these are in :root or tailwind.config.js) */
+:root {
+  --safari-sand: #f5e9d4;
+  --safari-green: #3a5f3f;
+  --safari-brown: #8b4513;
+  --safari-accent: #daa520;
+  --safari-dark: #1a2a1f;
+  --safari-blue: #2c7da0;
+  --text-light: #ffffff;
+  --text-dark: #2c3e30;
+}
+
+/* Safari Pattern Background */
+.pattern-safari {
+  background-image: radial-gradient(var(--safari-green) 1px, transparent 1px),
+    radial-gradient(var(--safari-accent) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+}
+
+/* Feature Card */
+.feature-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  transform-origin: center bottom;
+  min-height: 350px; /* Ensure equal card heights */
+}
+
+/* Icon Wrapper */
+.feature-icon-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
 }
 
 .feature-icon {
-  animation: gentlePulse 4s ease-in-out infinite;
+  font-size: 3rem;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
 }
 
-/* Conservation Status Indicator */
-.conservation-status {
-  position: relative;
-}
-
-.conservation-status::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-width: 0 40px 40px 0;
-  border-style: solid;
-  border-color: transparent #3A5F3F transparent transparent; /* safari-green */
-}
-
-/* Stat Highlight Background */
-.stat-highlight {
-  position: relative;
-}
-
-.stat-highlight::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(218, 165, 32, 0.1), transparent); /* safari-accent */
-  z-index: -1;
+/* Stat Badge */
+.stat-badge {
+  padding: 0.75rem 1.25rem;
   border-radius: 0 8px 8px 0;
+  width: fit-content;
+  transition: transform 0.3s ease;
 }
 
-/* Reduced Motion for Accessibility */
-@media (prefers-reduced-motion: reduce) {
+/* Conservation Ribbon */
+.conservation-ribbon {
+  position: absolute;
+  top: 1rem;
+  right: -2.5rem;
+  padding: 0.4rem 2rem;
+  display: flex;
+  align-items: center;
+  color: var(--text-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Eco Badge */
+.eco-badge {
+  transition: all 0.3s ease;
+}
+
+/* Animations */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(2deg); }
+  50% { transform: translateY(-12px) rotate(0deg); }
+  75% { transform: translateY(-8px) rotate(-2deg); }
+}
+
+/* Responsive Adjustments */
+@media (min-width: 1024px) {
+  .feature-card:nth-child(5) {
+    min-height: auto; /* Allow fifth card to adjust height */
+  }
+}
+
+@media (max-width: 1024px) {
   .feature-icon {
+    font-size: 2.5rem;
+  }
+  .feature-card h3 {
+    font-size: 1.5rem;
+  }
+  .feature-card {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-card {
+    text-align: center;
+    min-height: 300px;
+  }
+  .stat-badge {
+    border-radius: 8px;
+    border: 1px solid;
+    border-left-width: 4px;
+  }
+  .conservation-ribbon {
+    right: -2rem;
+    padding: 0.3rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .feature-icon {
+    font-size: 2rem;
+  }
+  .feature-card h3 {
+    font-size: 1.25rem;
+  }
+  .feature-card {
+    min-height: 280px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .feature-card,
+  .stat-badge,
+  .eco-badge,
+  .feature-icon {
+    transition: none;
     animation: none;
   }
+  .feature-card[style*="boxShadow"] {
+    box-shadow: none !important;
+  }
+}
+
+/* Performance Optimization */
+.feature-card,
+.feature-icon,
+.stat-badge,
+.eco-badge {
+  will-change: transform, box-shadow;
 }
