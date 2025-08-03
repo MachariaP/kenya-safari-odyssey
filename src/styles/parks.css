@@ -1,0 +1,117 @@
+/* src/styles/parks.css */
+
+/* Park Card */
+.park-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.park-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.park-card:focus {
+  outline: 2px solid var(--safari-accent);
+  outline-offset: 2px;
+}
+
+/* Conservation Badge */
+.conservation-badge {
+  transition: transform 0.3s ease;
+}
+
+.park-card:hover .conservation-badge {
+  transform: scale(1.1);
+}
+
+/* Safari Image System */
+.safari-image-container {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.4s ease;
+}
+
+.safari-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.park-card:hover .safari-image {
+  transform: scale(1.05);
+}
+
+/* Loading Animation */
+.safari-loading {
+  background: linear-gradient(270deg, #F5E9D4, #E1D6C9, #F5E9D4);
+  background-size: 200% 200%;
+  animation: safari-gradient 2s ease infinite;
+}
+
+@keyframes safari-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Modal */
+.modal-overlay {
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  animation: fadeInUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(212, 162, 89, 0.2);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(245, 233, 212, 0.3);
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #DAA520;
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #B88745;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .park-card {
+    margin-bottom: 2rem;
+  }
+  .modal-content {
+    max-width: 95%;
+    padding: 1rem;
+  }
+  .aspect-[3/2], .aspect-[16/9] {
+    aspect-ratio: 4/3;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .park-card, .safari-image, .modal-content, .conservation-badge {
+    transition: none;
+    animation: none;
+  }
+}
